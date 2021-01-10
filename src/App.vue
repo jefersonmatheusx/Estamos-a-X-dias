@@ -1,16 +1,25 @@
 <template>
+<div>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <BoardGrid :boards="boards"/>
+</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BoardGrid from './components/BoardGrid'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    BoardGrid
+  },
+  data:()=>({
+    boards:[
+      {name:'Quebrar copos', type:'sem',maxDays:10, dateStart:new Date()},
+      {name:'Quebrar pratos', type:'sem',maxDays:10, dateStart:'01/05/2021'},
+      {name:'Vivendo', type:'',maxDays:10, dateStart:'03/21/1993'}
+      ]
+  })
 }
 </script>
 
