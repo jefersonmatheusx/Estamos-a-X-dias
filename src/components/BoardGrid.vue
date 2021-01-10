@@ -1,30 +1,24 @@
 <template>
   <div class="boards">
-    <div v-for="(board, index) in boards" :key="board.name">
-      estamos a {{ range(index) }} {{ board.type }} {{ board.name }}
+    <CreateBoard @addBoard="this.boards.push($event)"/>
+    <div class='boardItem' v-for="(board, index) in boards" :key="board.description">
+      estamos a {{ range(index) }} {{ board.description }} <button @click="board.dateStart=new Date()">Reiniciar</button>
     </div>
   </div>
 </template>
 
 <script>
 import * as moment from 'moment'
+import CreateBoard from '@/components/BoardCreation'
 export default {
-  props: {
-    boards: {
-      type: Array,
-      default: () => [
-        {
-          name: 'Quebrar copos',
-          type: 'sem',
-          maxRange: 10,
-          dateStart: new Date(),
-        },
-      ],
-      required: true,
-    },
+  components:{
+    CreateBoard
   },
+  data:()=>({
+     boards: [],
+  }),
   methods: {
-    range(i) {
+  range(i) {
       const references = { minutes: 'minutos', hours: 'horas', days: 'dias', months:'meses' }
       let duration = 0
       let range = ''
@@ -36,7 +30,6 @@ export default {
           if (duration == 0) {
             duration = today.diff(start,ref)
             range = duration + ' ' + references[ref]
-            console.log(start.toString())
           }
         })
       return range
@@ -45,4 +38,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.boardItem{
+      padding: 10px;
+    border: 1px solid;
+    border-radius: 12px;
+    margin: 10px 0;
+    overflow-wrap: break-word;
+}
+</style>

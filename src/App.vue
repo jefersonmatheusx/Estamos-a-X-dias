@@ -1,7 +1,6 @@
 <template>
 <div>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <BoardGrid :boards="boards"/>
+  <BoardGrid />
 </div>
 </template>
 
@@ -13,23 +12,28 @@ export default {
   components: {
     BoardGrid
   },
-  data:()=>({
-    boards:[
-      {name:'Quebrar copos', type:'sem',maxDays:10, dateStart:new Date()},
-      {name:'Quebrar pratos', type:'sem',maxDays:10, dateStart:'01/05/2021'},
-      {name:'Vivendo', type:'',maxDays:10, dateStart:'03/21/1993'}
-      ]
-  })
 }
 </script>
 
 <style>
+body {
+  font-family: "Lato", sans-serif;
+  background: linear-gradient(to right, rgb(22, 34, 42), rgb(58, 96, 115));
+  color: #fff;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  height: 100vh;
+}
+
+#app h1 {
+  margin-bottom: 5px;
+  font-weight: 300;
+  font-size: 3rem;
 }
 </style>
