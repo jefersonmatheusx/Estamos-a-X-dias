@@ -3,9 +3,7 @@
     <h1 class="title">Estamos a <b>X</b> dias</h1>
     <CreateBoard class="creationForm" @addBoard="this.boards.push($event)" />
     <div class="boards">
-      <div v-for="(b,i) in boards" :key="b.id">
-        <Board :board="b" @removeBoard="removeBoard(i)" />
-      </div>
+      <Board v-for="(b,i) in boards" :key="b.id" :board="b" @removeBoard="removeBoard(i)" />
     </div>
   </div>
 </template>
@@ -20,7 +18,7 @@ export default {
   },
   data: () => ({
     boards: [{
-      dateStart: new Date(), description: 'teste', maxDays: '', actualRange: ''
+      // dateStart: new Date(), description: 'teste', maxRange: '', actualRange: ''
     }],
   }),
   watch: {
