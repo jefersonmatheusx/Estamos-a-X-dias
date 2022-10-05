@@ -32,7 +32,7 @@ export default {
   methods: {
     addBoard() {
       const { description, $emit } = this;
-      const objBoard = { description, maxDays: 0, dateStart: moment() };
+      const objBoard = { description, maxRange: '', dateStart: moment(), actualRange: 0, reseted: false, rangeSeconds: 0, maxRangeSeconds: 0 };
       $emit("addBoard", objBoard);
       this.description = ""
     },

@@ -5,8 +5,11 @@
       {{ board.description }}
     </p>
 
-    <button @click="mutableBoard.dateStart = new Date()">Reiniciar</button>
+    <button @click="resetBoardTime()">Reiniciar</button>
     <button @click="removeBoard()">Deletar</button>
+    <div>
+      <i v-if="board.reseted">maior período foi: {{board.maxRange}}</i>
+    </div>
   </div>
 </template>
 
@@ -14,20 +17,20 @@
 import * as moment from "moment";
 
 export default {
-  props: ['board'],
+  props: { board: { type: Object, required: true } },
   data: function () {
     return {
       mutableBoard: this.board
     }
   },
   created() {
+    this.range();
     setInterval(() => {
       this.range();
     }, 1000)
   },
   methods: {
     range() {
-
       const start = moment(this.board.dateStart);
       const today = moment();
       let textRange = ''
@@ -42,14 +45,23 @@ export default {
       textRange = arrayRange.toString().replace(/,/g, ',  ')
 
       this.mutableBoard.actualRange = textRange;
-
+      this.mutableBoard.rangeSeconds += seconds
     },
-
+    resetBoardTime() {
+      if (this.mutableBoard.maxRangeSeconds < this.mutableBoard.rangeSeconds) {
+        this.mutableBoard.maxRangeSeconds = this.mutableBoard.rangeSeconds
+        this.mutableBoard.maxRange = this.mutableBoard.actualRange
+      }
+      this.mutableBoard.rangeSeconds = 0
+      this.mutableBoard.dateStart = new Date()
+      this.mutableBoard.reseted = true
+    },
     removeBoard() {
       this.$emit('removeBoard')
     }
   },
 }
+
 </script>
     
 <style>
