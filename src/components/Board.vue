@@ -32,20 +32,19 @@ export default {
       const today = moment();
       let textRange = ''
       let { seconds, minutes, hours, days, months, years } = moment.duration(today.diff(start))._data
-      console.log({ seconds, minutes, hours, days, months, years })
-
-      // y + m + d
-      // m + d
-      // d + h
-
-      // --- hours range
-      // h + +min + seg
-      // m  + seg
-      // seg
-      textRange = seconds + ' segundos'
+      const arrayRange = [years + ' anos', months + ' meses', days + ' dias', hours + ' horas', minutes + ' minutos', seconds + ' segundos']
+        .reduce((acc, current) => {
+          if (current.split(' ')[0] > 0) {
+            acc.push(current)
+          }
+          return acc
+        }, [])
+      textRange = arrayRange.toString().replace(/,/g, ',  ')
 
       this.mutableBoard.actualRange = textRange;
+
     },
+
     removeBoard() {
       this.$emit('removeBoard')
     }
