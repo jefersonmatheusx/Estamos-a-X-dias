@@ -1,12 +1,13 @@
 <template >
-  <div class="boardItem">
+  <div class="board-item">
     <h3>Estamos a : <b>{{board.actualRange}}</b></h3>
-    <p class="subject">
+    <p class="description">
       {{ board.description }}
     </p>
-
-    <button @click="resetBoardTime()">Reiniciar</button>
-    <button @click="removeBoard()">Deletar</button>
+    <div class="board-footer">
+      <button @click="resetBoardTime()" class="btn-reset">Reiniciar</button>
+      <button @click="removeBoard()" class="btn-delete">Deletar</button>
+    </div>
     <div>
       <i v-if="board.reseted">maior período foi: {{board.maxRange}}</i>
     </div>
@@ -65,11 +66,41 @@ export default {
 </script>
     
 <style>
-.boardItem {
+.board-item {
+  position: relative;
+  box-sizing: border-box;
+  width: 350px;
   padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
   border: 1px solid;
-  border-radius: 12px;
-  margin: 10px 0;
+  margin: 10px;
   overflow-wrap: break-word;
+}
+
+.board-footer {
+  position: absolute;
+  bottom: 10px;
+  margin: 10px 0;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-delete {
+  background: #e85c5c;
+  border: white solid;
+  color: white;
+  padding: 8px;
+  border-radius: 0 8px 8px 0;
+  ;
+}
+
+.btn-reset {
+  color: black;
+  background: #f8de61;
+  border: white solid;
+  padding: 8px;
+  border-radius: 8px 0 0 8px;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <div class="board">
-    <h1 class="title">Estamos a <b>X</b> dias</h1>
+  <div class="board-content">
+    <h1 class="title">Estamos a <b class="logoX">X</b> dias</h1>
     <CreateBoard class="creationForm" @addBoard="this.boards.push($event)" />
-    <div class="boards">
+    <div class="board-grid">
       <Board v-for="(b,i) in boards" :key="b.id" :board="b" @removeBoard="removeBoard(i)" />
     </div>
   </div>
@@ -43,46 +43,34 @@ export default {
       this.boards.splice(i, 1);
     },
   },
-  // watch: {
-  //   timerCount: {
-  //     handler(value) {
-  //       if (value > 0) {
-  //         setTimeout(() => {
-  //           this.timerCount--;
-  //         }, 1000);
-  //       }
-  //     },
-  //     immediate: true, // This ensures the watcher is triggered upon creation
-  //   },
-  // }
 };
 </script>
 
 <style>
-.board {
-  /* display: flex; */
-  /* flex: 1;
-  flex-direction: column; */
-  align-items: center;
-  /* height: 10vh; */
+.board-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 10px
 }
 
-.boards {
-  display: block;
-  position: relative;
-  margin-top: 8px;
-  width: 90vw;
-  z-index: 0;
-}
-
-.subject {
+.description {
   display: list-item;
   margin: 4px 10px 17px 20px;
+  min-height: 100px;
+  margin-bottom: 50px;
+}
+
+.logoX {
+  text-shadow: 7px 10px 10px black;
+  font-size: 100px;
+  margin: 0px 10px
 }
 
 .title {
-  margin-bottom: 5px;
+  margin-bottom: 35px;
   font-weight: 300;
   font-size: 3rem;
+  text-align: center;
 }
 </style>
